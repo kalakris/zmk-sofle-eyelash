@@ -58,9 +58,9 @@ layers:
   - $$mdi:apple-keyboard-option$$
   - $$mdi:apple-keyboard-command$$
   - {t: '$$mdi:keyboard-return$$', h: layer1}
-  - {t: '[', s: '{'}
+  - {t: '$$mdi:apple-keyboard-shift$$', h: '$$mdi:gesture-tap-hold$$'}
   - {t: '$$mdi:keyboard-return$$', type: enter}
-  - {t: ']', s: '}'}
+  - {t: '$$mdi:apple-keyboard-shift$$', h: '$$mdi:gesture-tap-hold$$'}
   - {t: '$$mdi:keyboard-space$$', h: '2'}
   - {t: '$$mdi:backspace$$', type: backspace}
   - $$mdi:volume-low$$
@@ -279,3 +279,9 @@ combos:
   k: {t: '[', s: '{'}
 - p: [33, 34]
   k: {t: ']', s: '}'}
+- p: [46, 60]
+  k: {t: '$$mdi:keyboard-return$$', type: enter}
+- p: [44, 43]
+  k: '{'
+- p: [46, 47]
+  k: '}'

@@ -73,14 +73,29 @@
             key-positions = <20 21>;
         };
 
-        LBrace {
+        LBracket {
             bindings = <&kp LEFT_BRACKET>;
             key-positions = <30 31>;
         };
 
-        RBrace {
+        RBracket {
             bindings = <&kp RIGHT_BRACKET>;
             key-positions = <33 34>;
+        };
+
+        Enter {
+            bindings = <&kp ENTER>;
+            key-positions = <46 60>;
+        };
+
+        LBrace {
+            bindings = <&kp LEFT_BRACE>;
+            key-positions = <44 43>;
+        };
+
+        RBrace {
+            bindings = <&kp RIGHT_BRACE>;
+            key-positions = <46 47>;
         };
     };
 
@@ -92,11 +107,11 @@
 
         layer0 {
             bindings = <
-&gresc      &kp N1     &kp N2        &kp N3        &kp N4       &kp N5              &kp UP_ARROW     &kp N6             &kp N7       &kp N8         &kp N9             &kp N0           &kp BACKSPACE
-&kp TAB     &kp Q      &kp W         &kp E         &kp R        &kp T               &kp DOWN_ARROW   &kp Y              &kp U        &kp I          &kp O              &kp P            &kp BSLH
-&caps_word  &kp A      &kp S         &kp D         &kp F        &kp G               &kp LEFT_ARROW   &kp H              &kp J        &kp K          &kp L              &kp SEMICOLON    &kp APOS
-&kp LSHFT   &kp Z      &kp X         &kp C         &kp V        &kp B               &kp RIGHT_ARROW  &kp N              &kp M        &kp COMMA      &kp DOT            &kp SLASH        &kp RIGHT_SHIFT
-&kp C_MUTE  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &lt 1 ENTER  &kp LEFT_BRACKET    &kp ENTER        &kp RIGHT_BRACKET  &lt 2 SPACE  &kp BACKSPACE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP
+&gresc      &kp N1     &kp N2        &kp N3        &kp N4       &kp N5        &kp UP_ARROW     &kp N6      &kp N7       &kp N8         &kp N9             &kp N0           &kp BACKSPACE
+&kp TAB     &kp Q      &kp W         &kp E         &kp R        &kp T         &kp DOWN_ARROW   &kp Y       &kp U        &kp I          &kp O              &kp P            &kp BSLH
+&caps_word  &kp A      &kp S         &kp D         &kp F        &kp G         &kp LEFT_ARROW   &kp H       &kp J        &kp K          &kp L              &kp SEMICOLON    &kp APOS
+&kp LSHFT   &kp Z      &kp X         &kp C         &kp V        &kp B         &kp RIGHT_ARROW  &kp N       &kp M        &kp COMMA      &kp DOT            &kp SLASH        &kp RIGHT_SHIFT
+&kp C_MUTE  &kp LCTRL  &kp LEFT_ALT  &kp LEFT_GUI  &lt 1 ENTER  &sk LSHIFT    &kp ENTER        &sk RSHIFT  &lt 2 SPACE  &kp BACKSPACE  &kp C_VOLUME_DOWN  &kp C_VOLUME_UP
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;

@@ -20,6 +20,11 @@
   quick-tap-ms = <QUICK_TAP_MS>;
 };
 
+&sk {
+    release-after-ms = <2000>;
+    quick-release;
+};
+
 &mmv_input_listener { input-processors = <&zip_xy_scaler 2 1>; };
 
 &msc_input_listener { input-processors = <&zip_scroll_scaler 2 1>; };

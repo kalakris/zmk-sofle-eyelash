@@ -279,7 +279,7 @@ combos:
   k: {t: '[', s: '{'}
 - p: [33, 34]
   k: {t: ']', s: '}'}
-- p: [46, 60]
+- p: [60, 61]
   k: {t: '$$mdi:keyboard-return$$', type: enter}
 - p: [44, 43]
   k: '{'

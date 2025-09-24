@@ -101,7 +101,7 @@
 
         Enter {
             bindings = <&kp ENTER>;
-            key-positions = <46 60>;
+            key-positions = <60 61>;
         };
 
         LBrace {

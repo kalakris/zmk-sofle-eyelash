@@ -154,7 +154,7 @@
             bindings = <
 &gresc      &kp N1        &kp N2           &kp N3           &kp N4         &kp N5        &kp UP_ARROW     &kp N6      &kp N7         &kp N8            &kp N9             &kp N0                &kp BACKSPACE
 &kp TAB     &kp Q         &kp W            &kp E            &kp R          &kp T         &kp DOWN_ARROW   &kp Y       &kp U          &kp I             &kp O              &kp P                 &kp BSLH
-&caps_word  &hml LCTRL A  &hml LEFT_ALT S  &hml LEFT_GUI D  &hml LSHIFT F  &kp G         &kp LEFT_ARROW   &kp H       &hmr RSHIFT J  &hmr RIGHT_GUI K  &hmr RIGHT_ALT L   &hmr RCTRL SEMICOLON  &kp APOS
+&kp GLOBE   &hml LCTRL A  &hml LEFT_ALT S  &hml LEFT_GUI D  &hml LSHIFT F  &kp G         &kp LEFT_ARROW   &kp H       &hmr RSHIFT J  &hmr RIGHT_GUI K  &hmr RIGHT_ALT L   &hmr RCTRL SEMICOLON  &kp APOS
 &kp LSHFT   &kp Z         &kp X            &kp C            &kp V          &kp B         &kp RIGHT_ARROW  &kp N       &kp M          &kp COMMA         &kp DOT            &kp SLASH             &kp RIGHT_SHIFT
 &kp C_MUTE  &kp LCTRL     &kp LEFT_ALT     &kp LEFT_GUI     &lt 1 ENTER    &sk LSHIFT    &kp ENTER        &sk RSHIFT  &lt 2 SPACE    &kp BACKSPACE     &kp C_VOLUME_DOWN  &kp C_VOLUME_UP
             >;

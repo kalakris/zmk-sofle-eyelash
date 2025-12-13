@@ -178,7 +178,7 @@
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
-            display-name = "LAYER0";
+            display-name = "Base";
         };
 
         Nav {
@@ -190,7 +190,7 @@
 &kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
             >;
 
-            display-name = "layer1";
+            display-name = "Nav";
             sensor-bindings = <&scroll_encoder>;
         };
 
@@ -214,6 +214,8 @@
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &kp N1  &kp N2  &kp N3  &kp LS(PLUS)  &trans
 &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &kp N0  &kp N0  &trans
             >;
+
+            label = "Numpad";
         };
     };
 };

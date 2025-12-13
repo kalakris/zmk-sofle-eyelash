@@ -1,13 +1,12 @@
-name: Draw Keymap
+name: Build and Draw
 on:
   workflow_dispatch:
   push:
-    paths:
-      - "config/**"
-      - .github/workflows/draw.yml
-      - keymap_drawer.config.yaml
 
 jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@v0.3
+
   draw:
     uses: caksoylar/keymap-drawer/.github/workflows/draw-zmk.yml@main
     permissions:

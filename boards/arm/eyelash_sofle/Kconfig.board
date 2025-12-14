@@ -5,8 +5,8 @@
 
 config BOARD_EYELASH_SOFLE_LEFT
     bool "eyelash_sofle left"
-    depends on SOC_NRF52840_QIAA
+    depends on SOC_NRF52840
 
 config BOARD_EYELASH_SOFLE_RIGHT
     bool "eyelash_sofle right"
-    depends on SOC_NRF52840_QIAA
+    depends on SOC_NRF52840

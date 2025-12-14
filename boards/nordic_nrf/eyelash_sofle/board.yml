@@ -4,3 +4,6 @@ board:
   vendor: eyelashperipherals
   socs:
     - name: nrf52840
+      variants:
+        - name: left
+        - name: right

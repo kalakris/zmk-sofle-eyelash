@@ -6,3 +6,11 @@
 config BOARD_EYELASH_SOFLE
     bool
     select SOC_NRF52840_QIAA
+
+config BOARD_EYELASH_SOFLE_LEFT
+    bool
+    select BOARD_EYELASH_SOFLE
+
+config BOARD_EYELASH_SOFLE_RIGHT
+    bool
+    select BOARD_EYELASH_SOFLE

@@ -4,8 +4,3 @@ board:
   vendor: eyelashperipherals
   socs:
     - name: nrf52840
-  variants:
-    - name: left
-      cpucluster: cpuapp
-    - name: right
-      cpucluster: cpuapp

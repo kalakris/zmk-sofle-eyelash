@@ -1,0 +1,11 @@
+board:
+  name: eyelash_sofle
+  full_name: Eyelash Sofle
+  vendor: eyelashperipherals
+  socs:
+    - name: nrf52840
+  variants:
+    - name: left
+      cpucluster: cpuapp
+    - name: right
+      cpucluster: cpuapp

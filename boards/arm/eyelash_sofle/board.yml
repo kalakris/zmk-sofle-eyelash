@@ -1,5 +1,9 @@
-board:
-  name: eyelash_sofle
-  vendor: eyelashperipherals
-  socs:
-    - name: nrf52840
+boards:
+  - name: eyelash_sofle_left
+    vendor: eyelashperipherals
+    socs:
+      - name: nrf52840
+  - name: eyelash_sofle_right
+    vendor: eyelashperipherals
+    socs:
+      - name: nrf52840

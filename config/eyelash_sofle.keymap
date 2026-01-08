@@ -108,6 +108,11 @@
             bindings = <&kp RIGHT_BRACE>;
             key-positions = <46 47>;
         };
+
+        Underscore {
+            bindings = <&kp UNDER>;
+            key-positions = <47 48>;
+        };
     };
 
     behaviors {

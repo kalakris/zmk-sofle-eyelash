@@ -99,11 +99,6 @@
             key-positions = <33 34>;
         };
 
-        Enter {
-            bindings = <&kp ENTER>;
-            key-positions = <60 61>;
-        };
-
         LBrace {
             bindings = <&kp LEFT_BRACE>;
             key-positions = <44 43>;
@@ -174,7 +169,7 @@
 &kp TAB           &kp Q         &kp W            &kp E            &kp R          &kp T     &kp DOWN_ARROW   &kp Y       &kp U          &kp I             &kp O              &kp P                 &kp BSLH
 &kp GLOBE         &hml LCTRL A  &hml LEFT_ALT S  &hml LEFT_GUI D  &hml LSHIFT F  &kp G     &kp LEFT_ARROW   &kp H       &hmr RSHIFT J  &hmr RIGHT_GUI K  &hmr RIGHT_ALT L   &hmr RCTRL SEMICOLON  &kp APOS
 &kp LSHFT         &kp Z         &kp X            &kp C            &kp V          &kp B     &kp RIGHT_ARROW  &kp N       &kp M          &kp COMMA         &kp DOT            &kp SLASH             &kp RIGHT_SHIFT
-&kp C_MUTE        &kp LCTRL     &kp LEFT_ALT     &kp LEFT_GUI     &lt 1 ENTER    &mo 3     &kp ENTER        &sk RSHIFT  &lt 2 SPACE    &kp BACKSPACE     &kp C_VOLUME_DOWN  &kp C_VOLUME_UP
+&kp C_MUTE        &kp LCTRL     &kp LEFT_ALT     &kp LEFT_GUI     &lt 1 SPACE    &mo 3     &kp ENTER        &sk RSHIFT  &lt 2 SPACE    &kp BACKSPACE     &kp C_VOLUME_DOWN  &kp C_VOLUME_UP
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOLUME_UP C_VOL_DN>;
@@ -187,7 +182,7 @@
 &trans      &kp GRAVE        &mkp LCLK       &mkp MCLK        &mkp RCLK        &mkp MB4           &mmv MOVE_DOWN   &kp PG_UP        &kp HOME         &kp UP      &kp END    &kp MINUS         &kp EQUAL
 &trans      &kp TILDE        &trans          &trans           &trans           &mkp MB5           &mmv MOVE_LEFT   &kp PG_DN        &kp LEFT         &kp DOWN    &kp RIGHT  &kp LEFT_BRACKET  &kp RIGHT_BRACKET
 &trans      &rgb_ug RGB_OFF  &rgb_ug RGB_ON  &rgb_ug RGB_EFF  &rgb_ug RGB_EFR  &rgb_ug RGB_SPI    &mmv MOVE_RIGHT  &rgb_ug RGB_BRI  &rgb_ug RGB_BRD  &kp INSERT  &kp F11    &kp F12           &trans
-&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &trans           &trans      &trans     &trans
+&kp C_MUTE  &trans           &trans          &trans           &trans           &trans             &mkp LCLK        &trans           &kp ENTER        &trans      &trans     &trans
             >;
 
             display-name = "Nav";

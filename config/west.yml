@@ -10,10 +10,12 @@ manifest:
       url-base: https://github.com/GPeye
     - name: infely
       url-base: https://github.com/infely
+    - name: nmunnich
+      url-base: https://github.com/nmunnich
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: v0.3
+      remote: nmunnich
+      revision: behavior-event
       import: app/west.yml
     - name: nice-view-battery
       remote: infely

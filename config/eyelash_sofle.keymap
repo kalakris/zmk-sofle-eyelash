@@ -172,7 +172,7 @@
             quick-tap-ms = <175>;
             require-prior-idle-ms = <150>;
             bindings = <&mo>, <&kp>;
-            hold-trigger-key-positions = <21 22 23 34 35 36 47 48 49>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63>;
             hold-trigger-on-release;
         };
 
@@ -201,15 +201,12 @@
     };
 
     macros {
-        tmux_tab: tmux_tab {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
+        tmux_key: tmux_key {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
             wait-ms = <30>;
             tap-ms = <30>;
-            bindings =
-                <&macro_tap &kp LC(A)>
-                , <&macro_param_1to1>
-                , <&macro_tap &kp MACRO_PLACEHOLDER>;
+            bindings = <&macro_tap &kp LC(A)>, <&macro_tap &trans>;
         };
 
         vim_split: vim_split {
@@ -279,11 +276,11 @@
 
         Tmux {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans        &trans        &trans        &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &tmux_tab N7  &tmux_tab N8  &tmux_tab N9  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &tmux_tab N4  &tmux_tab N5  &tmux_tab N6  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &tmux_tab N1  &tmux_tab N2  &tmux_tab N3  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans        &trans        &tmux_tab N0  &trans        &trans
+&tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key    &trans  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key
+&tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key    &trans  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key
+&tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key    &trans  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key
+&trans     &trans     &tmux_key  &tmux_key  &tmux_key  &tmux_key    &trans  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &tmux_key  &trans
+&trans     &trans     &trans     &trans     &tmux_key  &tmux_key    &tmux_key  &trans  &tmux_key  &tmux_key  &trans     &trans
             >;
 
             display-name = "Tmux";

@@ -261,68 +261,68 @@ layers:
   - {t: '0', s: )}
   - {t: '$$mdi:transfer$$', type: trans}
   Tmux:
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - '&tmux_tab N7'
-  - '&tmux_tab N8'
-  - '&tmux_tab N9'
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - '&tmux_tab N4'
-  - '&tmux_tab N5'
-  - '&tmux_tab N6'
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
   - {type: held}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - {t: '$$mdi:transfer$$', type: trans}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
+  - '&tmux_key'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
-  - '&tmux_tab N1'
-  - '&tmux_tab N2'
-  - '&tmux_tab N3'
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - {t: '$$mdi:transfer$$', type: trans}
-  - '&tmux_tab N0'
+  - '&tmux_key'
+  - '&tmux_key'
   - {t: '$$mdi:transfer$$', type: trans}
   - {t: '$$mdi:transfer$$', type: trans}
   Vim:

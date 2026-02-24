@@ -26,10 +26,11 @@ git push
 gh run list --limit 1
 gh run watch          # live stream of build progress
 
-# 3. Download firmware artifacts once complete
-gh run download --dir firmware
-
-# Firmware files land in firmware/firmware/:
+# 3. Download firmware
+#    ./scripts/download-firmware.sh        — current branch
+#    ./scripts/download-firmware.sh --all  — all remote branches
+#
+# Firmware is organized by branch: firmware/<branch>/firmware/
 #   eyelash_sofle_studio_left.uf2        — left half (with ZMK Studio enabled)
 #   nice_view_adapter nice_view_battery-eyelash_sofle_right-zmk.uf2  — right half
 #   settings_reset-eyelash_sofle_left-zmk.uf2  — settings reset

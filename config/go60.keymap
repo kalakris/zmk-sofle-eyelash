@@ -1,0 +1,24 @@
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 25
+
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+
+#include "positions_go60.dtsi"
+#include "shared.dtsi"
+
+/* ── Go60-specific: dual Cirque trackpad input listeners ──────── */
+
+&cirque_lh_listener {
+    input-processors =
+        <&zip_xy_scaler 1 16>,
+        <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
+        <&zip_xy_to_scroll_mapper>,
+        <&zip_button_behaviors &none>;
+};
+
+&cirque_rh_listener {
+    input-processors =
+        <&zip_xy_scaler 3 1>,
+        <&zip_button_behaviors &none>;
+};

@@ -1,0 +1,100 @@
+/*
+ * Go60 position names, position groups, and ROW/THUMB macros.
+ *
+ * Go60 has 60 keys: rows R1-R4 have 12 each (6L + 6R, no encoder),
+ * row R5/thumb has 12 (3 left-bottom + 3 right-bottom + 3 left-thumb + 3 right-thumb).
+ *
+ * MoErgo naming convention (docs.moergo.com):
+ *   Finger keys: (side) C(column)R(row)  — C1=index(inner), C6=pinky(outer)
+ *   Thumb keys:  (side) T(number)        — T1=innermost, numbered outward
+ *
+ * Row R1 (pos 0-11):
+ *   LH C6R1(0)  C5R1(1)  C4R1(2)  C3R1(3)  C2R1(4)  C1R1(5)
+ *   RH C1R1(6)  C2R1(7)  C3R1(8)  C4R1(9)  C5R1(10) C6R1(11)
+ *
+ * Row R2 (pos 12-23):
+ *   LH C6R2(12) C5R2(13) C4R2(14) C3R2(15) C2R2(16) C1R2(17)
+ *   RH C1R2(18) C2R2(19) C3R2(20) C4R2(21) C5R2(22) C6R2(23)
+ *
+ * Row R3 (pos 24-35):
+ *   LH C6R3(24) C5R3(25) C4R3(26) C3R3(27) C2R3(28) C1R3(29)
+ *   RH C1R3(30) C2R3(31) C3R3(32) C4R3(33) C5R3(34) C6R3(35)
+ *
+ * Row R4 (pos 36-47):
+ *   LH C6R4(36) C5R4(37) C4R4(38) C3R4(39) C2R4(40) C1R4(41)
+ *   RH C1R4(42) C2R4(43) C3R4(44) C4R4(45) C5R4(46) C6R4(47)
+ *
+ * Row R5 + thumb (pos 48-59):
+ *   LH C4R5(48) C3R5(49) C2R5(50)   RH C2R5(51) C3R5(52) C4R5(53)
+ *   LH T3(54)   T2(55)   T1(56)     RH T1(57)   T2(58)   T3(59)
+ *
+ * Note: devicetree labels L_T1/R_T1 are numbered opposite to MoErgo docs.
+ *   DT L_T1(54) = MoErgo LH T3 (outermost)
+ *   DT L_T3(56) = MoErgo LH T1 (innermost, the "extra" key vs Sofle)
+ */
+
+/* ── Key positions for combos (QWERTY names) ─────────────────── */
+/* Row R2 */
+#define POS_Q     13  /* LH C5R2 */
+#define POS_W     14  /* LH C4R2 */
+#define POS_E     15  /* LH C3R2 */
+#define POS_R     16  /* LH C2R2 */
+#define POS_T     17  /* LH C1R2 */
+#define POS_Y     18  /* RH C1R2 */
+#define POS_U     19  /* RH C2R2 */
+#define POS_I     20  /* RH C3R2 */
+#define POS_O     21  /* RH C4R2 */
+#define POS_P     22  /* RH C5R2 */
+
+/* Row R3 */
+#define POS_F     28  /* LH C2R3 */
+#define POS_G     29  /* LH C1R3 */
+#define POS_H     30  /* RH C1R3 */
+#define POS_J     31  /* RH C2R3 */
+#define POS_K     32  /* RH C3R3 */
+#define POS_L     33  /* RH C4R3 */
+#define POS_SEMI  34  /* RH C5R3 */
+
+/* Row R4 */
+#define POS_V     40  /* LH C2R4 */
+#define POS_B     41  /* LH C1R4 */
+#define POS_N     42  /* RH C1R4 */
+#define POS_M     43  /* RH C2R4 */
+#define POS_COMMA 44  /* RH C3R4 */
+#define POS_DOT   45  /* RH C4R4 */
+
+/* ── Position groups for hold-trigger-key-positions ───────────── */
+
+/* Right hand: rows R1-R4 (RH C1-C6) */
+#define RIGHT_HAND  6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 42 43 44 45 46 47
+
+/* Left hand: rows R1-R4 (LH C1-C6) */
+#define LEFT_HAND   0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41
+
+/* Thumb / bottom row (R5 + T1-T3, all 12 keys) */
+#define THUMB_KEYS  48 49 50 51 52 53 54 55 56 57 58 59
+
+/* Right-hand 3×3 grid: RH C2-C4 × R2-R4 (for z_tmux, v_vim) */
+#define RIGHT_3X3   19 20 21 31 32 33 43 44 45
+
+/* All keys (for lth) */
+#define ALL_KEYS    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59
+
+/* ── ROW macro: rows R1-R4 (12 keys, no encoder column) ──────── */
+#define ROW(l6,l5,l4,l3,l2,l1, enc, r1,r2,r3,r4,r5,r6) \
+    l6 l5 l4 l3 l2 l1 r1 r2 r3 r4 r5 r6
+
+/* ── THUMB macro: row R5 + thumb cluster ────────────────────────
+ * 14 params (union of both keyboards).  Go60 keeps 12:
+ *   LH C4R5 C3R5 C2R5  RH C2R5 C3R5 C4R5  LH T3 T2 T1  RH T1 T2 T3
+ *
+ * Output order matches Go60 devicetree binding order (pos 48-59):
+ *   48-50: LH C4R5 C3R5 C2R5   (left bottom, outer→inner)
+ *   51-53: RH C2R5 C3R5 C4R5   (right bottom, inner→outer)
+ *   54-56: LH T3 T2 T1         (left thumb, outer→inner)
+ *   57-59: RH T1 T2 T3         (right thumb, inner→outer)
+ *
+ * Dropped: enc (Sofle encoder press), mid (Sofle middle key).
+ */
+#define THUMB(enc, lc4r5,lc3r5,lc2r5, lht3,lht2,lht1, mid, rht1,rht2,rht3, rc2r5,rc3r5,rc4r5) \
+    lc4r5 lc3r5 lc2r5 rc2r5 rc3r5 rc4r5 lht3 lht2 lht1 rht1 rht2 rht3

@@ -2,18 +2,16 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-      # Additional modules containing boards/shields/custom code can be listed here as well.
-      # See:
-      # - https://zmk.dev/docs/features/modules
-      # - https://docs.zephyrproject.org/3.5.0/develop/west/manifest.html#projects
+    - name: moergo-sc
+      url-base: https://github.com/moergo-sc
     - name: gpeye
       url-base: https://github.com/GPeye
     - name: infely
       url-base: https://github.com/infely
   projects:
     - name: zmk
-      remote: zmkfirmware
-      revision: v0.3
+      remote: moergo-sc
+      revision: go60-zmk0.3.0
       import: app/west.yml
     - name: nice-view-battery
       remote: infely

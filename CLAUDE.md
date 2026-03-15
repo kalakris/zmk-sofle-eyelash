@@ -55,3 +55,12 @@ The workflow also auto-commits a keymap drawing via keymap-drawer (commit messag
 
 ### Key Constants
 - `QUICK_TAP_MS = 175` — Quick-tap window used across behaviors
+
+## Go60 Export
+
+The Sofle keymap can be exported to MoErgo Go60 format. See [docs/go60-export.md](docs/go60-export.md) for full details.
+
+```bash
+python3 scripts/generate-go60-layout.py
+# Import sofle-eyelash-go60-layout.json at https://my.moergo.com/go60/
+```

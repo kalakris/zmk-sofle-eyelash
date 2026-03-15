@@ -1,0 +1,4919 @@
+{
+  "keyboard": "go60",
+  "firmware_api_version": "1",
+  "locale": "en-US",
+  "uuid": "60ecfd90-d7db-4885-8010-70bba8eb840f",
+  "parent_uuid": "2b914458-e6c4-4364-9f23-caa03fc02f3c",
+  "unlisted": false,
+  "date": 1773504808,
+  "creator": "kalakris",
+  "title": "Sofle Eyelash Export",
+  "notes": "Exported from Eyelash Sofle ZMK keymap.\n\nFeatures:\n- Urob timerless home-row mods (hml/hmr with positional hold-tap)\n- Layer-tap thumb keys (lth) for Nav, Numpad, System layers\n- Esc/Grave/Tilde mod-morph\n- Tmux layer (Ctrl+A + number) via hold on Z\n- Vim split navigation via hold on V\n- Graphite layout with transition steps (layers 1-8)\n\nLayers:\n- 0: Base (QWERTY)\n- 1-7: Graphite transition steps\n- 8: Graphite (final)\n- 9: Nav (navigation, function keys)\n- 10: System (Bluetooth, bootloader, layer switching)\n- 11: Numpad\n- 12: Tmux (tab switching)\n- 13: Vim (split navigation)\n- 14: Mouse (trackpad click layer)",
+  "tags": [
+    "qwerty",
+    "graphite",
+    "home-row-mods",
+    "mac"
+  ],
+  "custom_defined_behaviors": "combos {\n    compatible = \"zmk,combos\";\n\n    Backslash {\n        bindings = <&kp BACKSLASH>;\n        key-positions = <22 21>;\n    };\n\n    Quote {\n        bindings = <&kp SINGLE_QUOTE>;\n        key-positions = <33 34>;\n    };\n\n    Tab {\n        bindings = <&kp TAB>;\n        key-positions = <13 14>;\n    };\n\n    Minus {\n        bindings = <&kp MINUS>;\n        key-positions = <20 19>;\n    };\n\n    Equals {\n        bindings = <&kp EQUAL>;\n        key-positions = <21 20>;\n    };\n\n    LeftParen {\n        bindings = <&kp LPAR>;\n        key-positions = <16 17>;\n    };\n\n    RightParen {\n        bindings = <&kp RPAR>;\n        key-positions = <18 19>;\n    };\n\n    LBracket {\n        bindings = <&kp LEFT_BRACKET>;\n        key-positions = <28 29>;\n    };\n\n    RBracket {\n        bindings = <&kp RIGHT_BRACKET>;\n        key-positions = <30 31>;\n    };\n\n    LBrace {\n        bindings = <&kp LEFT_BRACE>;\n        key-positions = <41 40>;\n    };\n\n    RBrace {\n        bindings = <&kp RIGHT_BRACE>;\n        key-positions = <42 43>;\n    };\n\n    Underscore {\n        bindings = <&kp UNDER>;\n        key-positions = <43 44>;\n    };\n};\n\nmacros {\n    tmux_tab: tmux_tab {\n        compatible = \"zmk,behavior-macro-one-param\";\n        #binding-cells = <1>;\n        wait-ms = <30>;\n        tap-ms = <30>;\n        bindings =\n            <&macro_tap &kp LC(A)>\n            , <&macro_param_1to1>\n            , <&macro_tap &kp MACRO_PLACEHOLDER>;\n    };\n\n    vim_split: vim_split {\n        compatible = \"zmk,behavior-macro-one-param\";\n        #binding-cells = <1>;\n        wait-ms = <30>;\n        tap-ms = <30>;\n        bindings =\n            <&macro_tap &kp LC(W)>\n            , <&macro_param_1to1>\n            , <&macro_tap &kp MACRO_PLACEHOLDER>;\n    };\n};\n\nbehaviors {\n    inner_esc_grave: inner_esc_grave {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&kp ESC>, <&kp GRAVE>;\n        mods = <(MOD_LCTL|MOD_RCTL|MOD_LALT|MOD_RALT|MOD_LGUI|MOD_RGUI)>;\n    };\n\n    esc_grave_tilde: esc_grave_tilde {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&inner_esc_grave>, <&kp TILDE>;\n        mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n    graphite_apos: graphite_apos {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&kp SQT>, <&kp UNDER>;\n        mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n    graphite_minus: graphite_minus {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&kp MINUS>, <&kp DQT>;\n        mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n    graphite_comma: graphite_comma {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&kp COMMA>, <&kp QMARK>;\n        mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n    graphite_slash: graphite_slash {\n        compatible = \"zmk,behavior-mod-morph\";\n        #binding-cells = <0>;\n        bindings = <&kp SLASH>, <&kp LESS_THAN>;\n        mods = <(MOD_LSFT|MOD_RSFT)>;\n    };\n\n    hml: hml {\n        compatible = \"zmk,behavior-hold-tap\";\n        #binding-cells = <2>;\n        flavor = \"balanced\";\n        tapping-term-ms = <280>;\n        quick-tap-ms = <175>;\n        require-prior-idle-ms = <150>;\n        bindings = <&kp>, <&kp>;\n        hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 42 43 44 45 46 47 48 49 50 51 52 53 54 55 58 59>;\n        hold-trigger-on-release;\n    };\n\n    hmr: hmr {\n        compatible = \"zmk,behavior-hold-tap\";\n        #binding-cells = <2>;\n        flavor = \"balanced\";\n        tapping-term-ms = <280>;\n        quick-tap-ms = <175>;\n        require-prior-idle-ms = <150>;\n        bindings = <&kp>, <&kp>;\n        hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 48 49 50 51 52 53 54 55 58 59>;\n        hold-trigger-on-release;\n    };\n\n    z_tmux: z_tmux {\n        compatible = \"zmk,behavior-hold-tap\";\n        #binding-cells = <2>;\n        flavor = \"balanced\";\n        tapping-term-ms = <280>;\n        quick-tap-ms = <175>;\n        require-prior-idle-ms = <150>;\n        bindings = <&mo>, <&kp>;\n        hold-trigger-key-positions = <19 20 21 31 32 33 43 44 45>;\n        hold-trigger-on-release;\n    };\n\n    v_vim: v_vim {\n        compatible = \"zmk,behavior-hold-tap\";\n        #binding-cells = <2>;\n        flavor = \"balanced\";\n        tapping-term-ms = <280>;\n        quick-tap-ms = <175>;\n        require-prior-idle-ms = <150>;\n        bindings = <&mo>, <&kp>;\n        hold-trigger-key-positions = <19 20 21 31 32 33 43 44 45>;\n        hold-trigger-on-release;\n    };\n\n    lth: lth {\n        compatible = \"zmk,behavior-hold-tap\";\n        #binding-cells = <2>;\n        flavor = \"balanced\";\n        tapping-term-ms = <280>;\n        quick-tap-ms = <175>;\n        bindings = <&mo>, <&kp>;\n        hold-trigger-key-positions = <0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59>;\n        hold-trigger-on-release;\n    };\n};\n",
+  "custom_devicetree": "",
+  "config_parameters": [],
+  "layout_parameters": {
+    "cirque_touch_sensitivity": ""
+  },
+  "layer_names": [
+    "Base",
+    "Step1",
+    "Step2",
+    "Step3",
+    "Step4",
+    "Step5",
+    "Step5a",
+    "Step6",
+    "Graphite",
+    "Nav",
+    "System",
+    "Numpad",
+    "Tmux",
+    "Vim",
+    "Mouse"
+  ],
+  "layers": [
+    [
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&esc_grave_tilde"
+          }
+        ],
+        "decoration": {
+          "label": "Esc/`/~",
+          "description": "Tap: Esc, Shift: ~, Mod: `"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N1"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N2"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N3"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N4"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N5"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N6"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N7"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N8"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N9"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N0"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "BSPC"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "TAB"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Q"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "E"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "R"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "T"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "U"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "I"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "O"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "BSLH"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "GLOBE"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Ctrl, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Alt, Tap: S"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI D"
+          }
+        ],
+        "decoration": {
+          "label": "D",
+          "description": "Hold: Cmd, Tap: D"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT F"
+          }
+        ],
+        "decoration": {
+          "label": "F",
+          "description": "Hold: Shift, Tap: F"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "G"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "H"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT J"
+          }
+        ],
+        "decoration": {
+          "label": "J",
+          "description": "Hold: Shift, Tap: J"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI K"
+          }
+        ],
+        "decoration": {
+          "label": "K",
+          "description": "Hold: Cmd, Tap: K"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT L"
+          }
+        ],
+        "decoration": {
+          "label": "L",
+          "description": "Hold: Alt, Tap: L"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL SEMI"
+          }
+        ],
+        "decoration": {
+          "label": ";",
+          "description": "Hold: Ctrl, Tap: ;"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SQT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LSHFT"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&z_tmux 12 Z"
+          }
+        ],
+        "decoration": {
+          "label": "Z/Tmux",
+          "description": "Hold: Tmux layer, Tap: Z"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "X"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "C"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&v_vim 13 V"
+          }
+        ],
+        "decoration": {
+          "label": "V/Vim",
+          "description": "Hold: Vim layer, Tap: V"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "B"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "COMMA"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "DOT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "FSLH"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RSHFT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LCTRL"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LALT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LGUI"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "BSPC"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "C_VOL_DN"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "C_VOL_UP"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&lth 9 SPACE"
+          }
+        ],
+        "decoration": {
+          "label": "Space/Nav",
+          "description": "Hold: Nav layer, Tap: Space"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&lth 11 RET"
+          }
+        ],
+        "decoration": {
+          "label": "Enter/Num",
+          "description": "Hold: Numpad layer, Tap: Enter"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RET"
+          }
+        ]
+      },
+      {
+        "value": "&mkp",
+        "params": [
+          {
+            "value": "LCLK"
+          }
+        ]
+      },
+      {
+        "value": "&mkp",
+        "params": [
+          {
+            "value": "RCLK"
+          }
+        ],
+        "decoration": {
+          "label": "Sticky Shift",
+          "description": "Sticky shift (one-shot)"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&lth 10 SPACE"
+          }
+        ],
+        "decoration": {
+          "label": "Space/Sys",
+          "description": "Hold: System layer, Tap: Space"
+        }
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SEMI"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "J"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT H"
+          }
+        ],
+        "decoration": {
+          "label": "H",
+          "description": "Hold: Shift, Tap: H"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL I"
+          }
+        ],
+        "decoration": {
+          "label": "I",
+          "description": "Hold: Ctrl, Tap: I"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "B"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Z"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SQT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "O"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "U"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "J"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT H"
+          }
+        ],
+        "decoration": {
+          "label": "H",
+          "description": "Hold: Shift, Tap: H"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL I"
+          }
+        ],
+        "decoration": {
+          "label": "I",
+          "description": "Hold: Ctrl, Tap: I"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&z_tmux 12 Q"
+          }
+        ],
+        "decoration": {
+          "label": "Q/Tmux",
+          "description": "Hold: Tmux layer, Tap: Q"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&v_vim 13 C"
+          }
+        ],
+        "decoration": {
+          "label": "C/Vim",
+          "description": "Hold: Vim layer, Tap: C"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "V"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "B"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Z"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SEMI"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "J"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT H"
+          }
+        ],
+        "decoration": {
+          "label": "H",
+          "description": "Hold: Shift, Tap: H"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL I"
+          }
+        ],
+        "decoration": {
+          "label": "I",
+          "description": "Hold: Ctrl, Tap: I"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&z_tmux 12 Q"
+          }
+        ],
+        "decoration": {
+          "label": "Q/Tmux",
+          "description": "Hold: Tmux layer, Tap: Q"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "B"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Z"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "SQT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "O"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "U"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "J"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT H"
+          }
+        ],
+        "decoration": {
+          "label": "H",
+          "description": "Hold: Shift, Tap: H"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL I"
+          }
+        ],
+        "decoration": {
+          "label": "I",
+          "description": "Hold: Ctrl, Tap: I"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "COMMA"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&z_tmux 12 Q"
+          }
+        ],
+        "decoration": {
+          "label": "Q/Tmux",
+          "description": "Hold: Tmux layer, Tap: Q"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&v_vim 13 C"
+          }
+        ],
+        "decoration": {
+          "label": "C/Vim",
+          "description": "Hold: Vim layer, Tap: C"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "V"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "DOT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "MINUS"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "B"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "L"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "D"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "W"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Z"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&graphite_apos"
+          }
+        ],
+        "decoration": {
+          "label": "'/_",
+          "description": "Tap: ', Shift: _"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "O"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "U"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "J"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LCTRL N"
+          }
+        ],
+        "decoration": {
+          "label": "N",
+          "description": "Hold: Ctrl, Tap: N"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LALT R"
+          }
+        ],
+        "decoration": {
+          "label": "R",
+          "description": "Hold: Alt, Tap: R"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LGUI T"
+          }
+        ],
+        "decoration": {
+          "label": "T",
+          "description": "Hold: Cmd, Tap: T"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hml LSHFT S"
+          }
+        ],
+        "decoration": {
+          "label": "S",
+          "description": "Hold: Shift, Tap: S"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "Y"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RSHFT H"
+          }
+        ],
+        "decoration": {
+          "label": "H",
+          "description": "Hold: Shift, Tap: H"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RGUI A"
+          }
+        ],
+        "decoration": {
+          "label": "A",
+          "description": "Hold: Cmd, Tap: A"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RALT E"
+          }
+        ],
+        "decoration": {
+          "label": "E",
+          "description": "Hold: Alt, Tap: E"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&hmr RCTRL I"
+          }
+        ],
+        "decoration": {
+          "label": "I",
+          "description": "Hold: Ctrl, Tap: I"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&graphite_comma"
+          }
+        ],
+        "decoration": {
+          "label": ",/?",
+          "description": "Tap: comma, Shift: ?"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&z_tmux 12 Q"
+          }
+        ],
+        "decoration": {
+          "label": "Q/Tmux",
+          "description": "Hold: Tmux layer, Tap: Q"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "M"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&v_vim 13 C"
+          }
+        ],
+        "decoration": {
+          "label": "C/Vim",
+          "description": "Hold: Vim layer, Tap: C"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "V"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "K"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "P"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "DOT"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&graphite_minus"
+          }
+        ],
+        "decoration": {
+          "label": "-/\"",
+          "description": "Tap: -, Shift: \""
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&graphite_slash"
+          }
+        ],
+        "decoration": {
+          "label": "/ /<",
+          "description": "Tap: /, Shift: <"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "GRAVE"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F1"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F2"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F3"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F4"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F5"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F6"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F7"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F8"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F9"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F10"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "GRAVE"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LG(R)"
+          }
+        ],
+        "decoration": {
+          "label": "Cmd+R",
+          "description": "Command+R"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "PG_UP"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "HOME"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "UP"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "END"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "MINUS"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "EQUAL"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "GRAVE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "PG_DN"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LEFT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "DOWN"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RIGHT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LBKT"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RBKT"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LG(Z)"
+          }
+        ],
+        "decoration": {
+          "label": "Cmd+Z",
+          "description": "Undo"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LG(X)"
+          }
+        ],
+        "decoration": {
+          "label": "Cmd+X",
+          "description": "Cut"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LG(C)"
+          }
+        ],
+        "decoration": {
+          "label": "Cmd+C",
+          "description": "Copy"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LG(V)"
+          }
+        ],
+        "decoration": {
+          "label": "Cmd+V",
+          "description": "Paste"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "INS"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F11"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F12"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "RET"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "GRAVE"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_SEL 0"
+          }
+        ],
+        "decoration": {
+          "label": "BT 0",
+          "description": "Bluetooth profile 0"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_SEL 1"
+          }
+        ],
+        "decoration": {
+          "label": "BT 1",
+          "description": "Bluetooth profile 1"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_SEL 2"
+          }
+        ],
+        "decoration": {
+          "label": "BT 2",
+          "description": "Bluetooth profile 2"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_SEL 3"
+          }
+        ],
+        "decoration": {
+          "label": "BT 3",
+          "description": "Bluetooth profile 3"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_SEL 4"
+          }
+        ],
+        "decoration": {
+          "label": "BT 4",
+          "description": "Bluetooth profile 4"
+        }
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F6"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F7"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F8"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F9"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "F10"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 0"
+          }
+        ],
+        "decoration": {
+          "label": "Base",
+          "description": "Switch to Base layer"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 1"
+          }
+        ],
+        "decoration": {
+          "label": "Step1",
+          "description": "Switch to Step 1"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 2"
+          }
+        ],
+        "decoration": {
+          "label": "Step2",
+          "description": "Switch to Step 2"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 3"
+          }
+        ],
+        "decoration": {
+          "label": "Step3",
+          "description": "Switch to Step 3"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 4"
+          }
+        ],
+        "decoration": {
+          "label": "Step4",
+          "description": "Switch to Step 4"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 5"
+          }
+        ],
+        "decoration": {
+          "label": "Step5",
+          "description": "Switch to Step 5"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 6"
+          }
+        ],
+        "decoration": {
+          "label": "Step5a",
+          "description": "Switch to Step 5a"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 7"
+          }
+        ],
+        "decoration": {
+          "label": "Step6",
+          "description": "Switch to Step 6"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&to 8"
+          }
+        ],
+        "decoration": {
+          "label": "Graphite",
+          "description": "Switch to Graphite"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&out OUT_USB"
+          }
+        ],
+        "decoration": {
+          "label": "USB",
+          "description": "Output: USB"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&out OUT_BLE"
+          }
+        ],
+        "decoration": {
+          "label": "BLE",
+          "description": "Output: Bluetooth"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_CLR"
+          }
+        ],
+        "decoration": {
+          "label": "BT Clr",
+          "description": "Clear current BT profile"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bt BT_CLR_ALL"
+          }
+        ],
+        "decoration": {
+          "label": "BT ClrAll",
+          "description": "Clear all BT profiles"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "LBKT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "LS",
+            "params": [
+              {
+                "value": "RBKT"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&sys_reset"
+          }
+        ],
+        "decoration": {
+          "label": "Reset",
+          "description": "System reset"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bootloader"
+          }
+        ],
+        "decoration": {
+          "label": "Boot",
+          "description": "Enter bootloader"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&sys_reset"
+          }
+        ],
+        "decoration": {
+          "label": "Reset",
+          "description": "System reset"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&soft_off"
+          }
+        ],
+        "decoration": {
+          "label": "Off",
+          "description": "Soft power off"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&bootloader"
+          }
+        ],
+        "decoration": {
+          "label": "Boot",
+          "description": "Enter bootloader"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N1"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N2"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N3"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N4"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N5"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N6"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N7"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N8"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N9"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N0"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_BRI"
+          }
+        ],
+        "decoration": {
+          "label": "RGB+",
+          "description": "RGB brightness up"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_BRD"
+          }
+        ],
+        "decoration": {
+          "label": "RGB-",
+          "description": "RGB brightness down"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N4"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N5"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N6"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "MINUS"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_OFF"
+          }
+        ],
+        "decoration": {
+          "label": "RGB Off",
+          "description": "Turn off RGB"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_ON"
+          }
+        ],
+        "decoration": {
+          "label": "RGB On",
+          "description": "Turn on RGB"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_EFF"
+          }
+        ],
+        "decoration": {
+          "label": "Eff+",
+          "description": "RGB effect forward"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_EFR"
+          }
+        ],
+        "decoration": {
+          "label": "Eff-",
+          "description": "RGB effect reverse"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&rgb_ug RGB_SPI"
+          }
+        ],
+        "decoration": {
+          "label": "Spd+",
+          "description": "RGB speed increase"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N1"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N2"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N3"
+          }
+        ]
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&kp LS(EQUAL)"
+          }
+        ],
+        "decoration": {
+          "label": "+",
+          "description": "Plus"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N0"
+          }
+        ]
+      },
+      {
+        "value": "&kp",
+        "params": [
+          {
+            "value": "N0"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N7"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 7",
+          "description": "Tmux tab 7"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N8"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 8",
+          "description": "Tmux tab 8"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N9"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 9",
+          "description": "Tmux tab 9"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N4"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 4",
+          "description": "Tmux tab 4"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N5"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 5",
+          "description": "Tmux tab 5"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N6"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 6",
+          "description": "Tmux tab 6"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N1"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 1",
+          "description": "Tmux tab 1"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N2"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 2",
+          "description": "Tmux tab 2"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N3"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 3",
+          "description": "Tmux tab 3"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&tmux_tab N0"
+          }
+        ],
+        "decoration": {
+          "label": "Tmux 0",
+          "description": "Tmux tab 0"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&vim_split K"
+          }
+        ],
+        "decoration": {
+          "label": "Split Up",
+          "description": "Vim split up (Ctrl+W K)"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&vim_split H"
+          }
+        ],
+        "decoration": {
+          "label": "Split Left",
+          "description": "Vim split left (Ctrl+W H)"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&vim_split J"
+          }
+        ],
+        "decoration": {
+          "label": "Split Down",
+          "description": "Vim split down (Ctrl+W J)"
+        }
+      },
+      {
+        "value": "Custom",
+        "params": [
+          {
+            "value": "&vim_split L"
+          }
+        ],
+        "decoration": {
+          "label": "Split Right",
+          "description": "Vim split right (Ctrl+W L)"
+        }
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      }
+    ],
+    [
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&trans"
+      },
+      {
+        "value": "&mkp",
+        "params": [
+          {
+            "value": "LCLK"
+          }
+        ]
+      },
+      {
+        "value": "&mkp",
+        "params": [
+          {
+            "value": "RCLK"
+          }
+        ]
+      },
+      {
+        "value": "&trans"
+      }
+    ]
+  ],
+  "macros": [],
+  "inputListeners": [
+    {
+      "code": "&cirque_lh_listener",
+      "inputProcessors": [
+        {
+          "code": "&zip_xy_scaler",
+          "params": [
+            1,
+            16
+          ]
+        },
+        {
+          "code": "&zip_xy_transform",
+          "params": [
+            [
+              "INPUT_TRANSFORM_Y_INVERT"
+            ]
+          ]
+        },
+        {
+          "code": "&zip_xy_to_scroll_mapper",
+          "params": []
+        },
+        {
+          "code": "&zip_button_behaviors",
+          "params": [
+            {
+              "value": "&none"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "code": "&cirque_rh_listener",
+      "inputProcessors": [
+        {
+          "code": "&zip_xy_scaler",
+          "params": [
+            3,
+            1
+          ]
+        },
+        {
+          "code": "&zip_button_behaviors",
+          "params": [
+            {
+              "value": "&none"
+            }
+          ]
+        },
+        {
+          "code": "&zip_temp_layer",
+          "params": [
+            14,
+            200
+          ]
+        }
+      ]
+    }
+  ],
+  "holdTaps": [],
+  "combos": []
+}

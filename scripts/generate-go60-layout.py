@@ -138,11 +138,11 @@ def mkp(button):
 # Layer definitions
 # =============================================================================
 # Layer indices:
-# 0: Base       5: Step5      10: System
-# 1: Step1      6: Step5a     11: Numpad
-# 2: Step2      7: Step6      12: Tmux
-# 3: Step3      8: Graphite   13: Vim
-# 4: Step4      9: Nav        14: Mouse
+# 0: Base        3: System
+# 1: Graphite    4: Numpad
+# 2: Nav         5: Tmux
+#                6: Vim
+#                7: Mouse
 
 # ============ LAYER 0: Base ============
 base = [
@@ -171,9 +171,9 @@ base = [
     kp("SQT"),
     # Row 3 left
     kp("LSHFT"),
-    custom("&z_tmux 12 Z", "Z/Tmux", "Hold: Tmux layer, Tap: Z"),
+    custom("&z_tmux 5 Z", "Z/Tmux", "Hold: Tmux layer, Tap: Z"),
     kp("X"), kp("C"),
-    custom("&v_vim 13 V", "V/Vim", "Hold: Vim layer, Tap: V"),
+    custom("&v_vim 6 V", "V/Vim", "Hold: Vim layer, Tap: V"),
     kp("B"),
     # Row 3 right
     kp("N"), kp("M"), kp("COMMA"), kp("DOT"), kp("FSLH"), kp("RSHFT"),
@@ -186,149 +186,15 @@ base = [
     kp("C_VOL_DN"),  # R_C3R5 (52)
     kp("C_VOL_UP"),  # R_C4R5 (53)
     # Row 4 thumb cluster (positions 54-59)
-    custom("&lth 9 SPACE", "Space/Nav", "Hold: Nav layer, Tap: Space"),  # L_T1 (54)
-    custom("&lth 11 RET", "Enter/Num", "Hold: Numpad layer, Tap: Enter"),  # L_T2 (55)
+    custom("&lth 2 SPACE", "Space/Nav", "Hold: Nav layer, Tap: Space"),  # L_T1 (54)
+    custom("&lth 4 RET", "Enter/Num", "Hold: Numpad layer, Tap: Enter"),  # L_T2 (55)
     kp("RET"),    # L_T3 (56) — innermost left thumb
     mkp("LCLK"),  # R_T3 (57) — innermost right thumb
     {"value": "&mkp", "params": [{"value": "RCLK"}], "decoration": {"label": "Sticky Shift", "description": "Sticky shift (one-shot)"}},  # R_T2 (58)
-    custom("&lth 10 SPACE", "Space/Sys", "Hold: System layer, Tap: Space"),  # R_T1 (59)
+    custom("&lth 3 SPACE", "Space/Sys", "Hold: System layer, Tap: Space"),  # R_T1 (59)
 ]
 
-# ============ LAYER 1: Step1 ============
-step1 = [trans()] * 60
-step1[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step1[33] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step1[42] = kp("K")
-
-# ============ LAYER 2: Step2 ============
-step2 = [trans()] * 60
-step2[15] = kp("D")
-step2[17] = kp("L")
-step2[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step2[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step2[33] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step2[34] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step2[42] = kp("K")
-
-# ============ LAYER 3: Step3 ============
-step3 = [trans()] * 60
-step3[14] = kp("L")
-step3[15] = kp("D")
-step3[16] = kp("W")
-step3[17] = kp("F")
-step3[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step3[26] = custom("&hml LALT R", "R", "Hold: Alt, Tap: R")
-step3[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step3[28] = custom("&hml LSHFT S", "S", "Hold: Shift, Tap: S")
-step3[33] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step3[34] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step3[42] = kp("K")
-
-# ============ LAYER 4: Step4 ============
-step4 = [trans()] * 60
-step4[14] = kp("L")
-step4[15] = kp("D")
-step4[16] = kp("W")
-step4[17] = kp("F")
-step4[18] = kp("SEMI")
-step4[20] = kp("M")
-step4[22] = kp("J")
-step4[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step4[26] = custom("&hml LALT R", "R", "Hold: Alt, Tap: R")
-step4[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step4[28] = custom("&hml LSHFT S", "S", "Hold: Shift, Tap: S")
-step4[30] = kp("Y")
-step4[31] = custom("&hmr RSHFT H", "H", "Hold: Shift, Tap: H")
-step4[32] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step4[33] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step4[34] = custom("&hmr RCTRL I", "I", "Hold: Ctrl, Tap: I")
-step4[42] = kp("K")
-step4[43] = kp("P")
-
-# ============ LAYER 5: Step5 ============
-step5 = [trans()] * 60
-step5[13] = kp("B")
-step5[14] = kp("L")
-step5[15] = kp("D")
-step5[16] = kp("W")
-step5[17] = kp("Z")
-step5[18] = kp("SQT")
-step5[19] = kp("F")
-step5[20] = kp("O")
-step5[21] = kp("U")
-step5[22] = kp("J")
-step5[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step5[26] = custom("&hml LALT R", "R", "Hold: Alt, Tap: R")
-step5[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step5[28] = custom("&hml LSHFT S", "S", "Hold: Shift, Tap: S")
-step5[30] = kp("Y")
-step5[31] = custom("&hmr RSHFT H", "H", "Hold: Shift, Tap: H")
-step5[32] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step5[33] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step5[34] = custom("&hmr RCTRL I", "I", "Hold: Ctrl, Tap: I")
-step5[37] = custom("&z_tmux 12 Q", "Q/Tmux", "Hold: Tmux layer, Tap: Q")
-step5[39] = kp("M")
-step5[40] = custom("&v_vim 13 C", "C/Vim", "Hold: Vim layer, Tap: C")
-step5[41] = kp("V")
-step5[42] = kp("K")
-step5[43] = kp("P")
-
-# ============ LAYER 6: Step5a ============
-step5a = [trans()] * 60
-step5a[13] = kp("B")
-step5a[14] = kp("L")
-step5a[15] = kp("D")
-step5a[16] = kp("W")
-step5a[17] = kp("Z")
-step5a[18] = kp("SEMI")
-step5a[20] = kp("M")
-step5a[22] = kp("J")
-step5a[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step5a[26] = custom("&hml LALT R", "R", "Hold: Alt, Tap: R")
-step5a[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step5a[28] = custom("&hml LSHFT S", "S", "Hold: Shift, Tap: S")
-step5a[30] = kp("Y")
-step5a[31] = custom("&hmr RSHFT H", "H", "Hold: Shift, Tap: H")
-step5a[32] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step5a[33] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step5a[34] = custom("&hmr RCTRL I", "I", "Hold: Ctrl, Tap: I")
-step5a[37] = custom("&z_tmux 12 Q", "Q/Tmux", "Hold: Tmux layer, Tap: Q")
-step5a[41] = kp("F")
-step5a[42] = kp("K")
-step5a[43] = kp("P")
-
-# ============ LAYER 7: Step6 ============
-step6 = [trans()] * 60
-step6[13] = kp("B")
-step6[14] = kp("L")
-step6[15] = kp("D")
-step6[16] = kp("W")
-step6[17] = kp("Z")
-step6[18] = kp("SQT")
-step6[19] = kp("F")
-step6[20] = kp("O")
-step6[21] = kp("U")
-step6[22] = kp("J")
-step6[25] = custom("&hml LCTRL N", "N", "Hold: Ctrl, Tap: N")
-step6[26] = custom("&hml LALT R", "R", "Hold: Alt, Tap: R")
-step6[27] = custom("&hml LGUI T", "T", "Hold: Cmd, Tap: T")
-step6[28] = custom("&hml LSHFT S", "S", "Hold: Shift, Tap: S")
-step6[30] = kp("Y")
-step6[31] = custom("&hmr RSHFT H", "H", "Hold: Shift, Tap: H")
-step6[32] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
-step6[33] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
-step6[34] = custom("&hmr RCTRL I", "I", "Hold: Ctrl, Tap: I")
-step6[35] = kp("COMMA")
-step6[37] = custom("&z_tmux 12 Q", "Q/Tmux", "Hold: Tmux layer, Tap: Q")
-step6[39] = kp("M")
-step6[40] = custom("&v_vim 13 C", "C/Vim", "Hold: Vim layer, Tap: C")
-step6[41] = kp("V")
-step6[42] = kp("K")
-step6[43] = kp("P")
-step6[44] = kp("DOT")
-step6[45] = kp("MINUS")
-
-# ============ LAYER 8: Graphite ============
+# ============ LAYER 1: Graphite ============
 graphite = [trans()] * 60
 graphite[13] = kp("B")
 graphite[14] = kp("L")
@@ -350,9 +216,9 @@ graphite[32] = custom("&hmr RGUI A", "A", "Hold: Cmd, Tap: A")
 graphite[33] = custom("&hmr RALT E", "E", "Hold: Alt, Tap: E")
 graphite[34] = custom("&hmr RCTRL I", "I", "Hold: Ctrl, Tap: I")
 graphite[35] = custom("&graphite_comma", ",/?", "Tap: comma, Shift: ?")
-graphite[37] = custom("&z_tmux 12 Q", "Q/Tmux", "Hold: Tmux layer, Tap: Q")
+graphite[37] = custom("&z_tmux 5 Q", "Q/Tmux", "Hold: Tmux layer, Tap: Q")
 graphite[39] = kp("M")
-graphite[40] = custom("&v_vim 13 C", "C/Vim", "Hold: Vim layer, Tap: C")
+graphite[40] = custom("&v_vim 6 C", "C/Vim", "Hold: Vim layer, Tap: C")
 graphite[41] = kp("V")
 graphite[42] = kp("K")
 graphite[43] = kp("P")
@@ -360,7 +226,7 @@ graphite[44] = kp("DOT")
 graphite[45] = custom("&graphite_minus", "-/\"", "Tap: -, Shift: \"")
 graphite[46] = custom("&graphite_slash", "/ /<", "Tap: /, Shift: <")
 
-# ============ LAYER 9: Nav ============
+# ============ LAYER 2: Nav ============
 nav = [
     # Row 0 left
     kp("GRAVE"), kp("F1"), kp("F2"), kp("F3"), kp("F4"), kp("F5"),
@@ -400,7 +266,7 @@ nav = [
     kp("RET"),  # R_T1
 ]
 
-# ============ LAYER 10: System ============
+# ============ LAYER 3: System ============
 system = [
     # Row 0 left
     ls("GRAVE"),
@@ -414,15 +280,10 @@ system = [
     # Row 1 left
     trans(),
     custom("&to 0", "Base", "Switch to Base layer"),
-    custom("&to 1", "Step1", "Switch to Step 1"),
-    custom("&to 2", "Step2", "Switch to Step 2"),
-    custom("&to 3", "Step3", "Switch to Step 3"),
-    custom("&to 4", "Step4", "Switch to Step 4"),
+    custom("&to 1", "Graphite", "Switch to Graphite"),
+    trans(), trans(), trans(),
     # Row 1 right
-    custom("&to 5", "Step5", "Switch to Step 5"),
-    custom("&to 6", "Step5a", "Switch to Step 5a"),
-    custom("&to 7", "Step6", "Switch to Step 6"),
-    custom("&to 8", "Graphite", "Switch to Graphite"),
+    trans(), trans(), trans(), trans(),
     trans(), trans(),
     # Row 2 left
     trans(),
@@ -459,7 +320,7 @@ system = [
     trans(),  # R_T1
 ]
 
-# ============ LAYER 11: Numpad ============
+# ============ LAYER 4: Numpad ============
 numpad = [
     # Row 0
     trans(), trans(), trans(), trans(), trans(), trans(),
@@ -493,7 +354,7 @@ numpad = [
     kp("N0"),  # R_T1
 ]
 
-# ============ LAYER 12: Tmux ============
+# ============ LAYER 5: Tmux ============
 tmux = [trans()] * 60
 tmux[19] = custom("&tmux_tab N7", "Tmux 7", "Tmux tab 7")
 tmux[20] = custom("&tmux_tab N8", "Tmux 8", "Tmux tab 8")
@@ -506,14 +367,14 @@ tmux[44] = custom("&tmux_tab N2", "Tmux 2", "Tmux tab 2")
 tmux[45] = custom("&tmux_tab N3", "Tmux 3", "Tmux tab 3")
 tmux[52] = custom("&tmux_tab N0", "Tmux 0", "Tmux tab 0")
 
-# ============ LAYER 13: Vim ============
+# ============ LAYER 6: Vim ============
 vim = [trans()] * 60
 vim[20] = custom("&vim_split K", "Split Up", "Vim split up (Ctrl+W K)")
 vim[31] = custom("&vim_split H", "Split Left", "Vim split left (Ctrl+W H)")
 vim[32] = custom("&vim_split J", "Split Down", "Vim split down (Ctrl+W J)")
 vim[33] = custom("&vim_split L", "Split Right", "Vim split right (Ctrl+W L)")
 
-# ============ LAYER 14: Mouse ============
+# ============ LAYER 7: Mouse ============
 mouse = [trans()] * 60
 mouse[57] = mkp("LCLK")
 mouse[58] = mkp("RCLK")
@@ -746,17 +607,16 @@ layout = {
         "- Esc/Grave/Tilde mod-morph\n"
         "- Tmux layer (Ctrl+A + number) via hold on Z\n"
         "- Vim split navigation via hold on V\n"
-        "- Graphite layout with transition steps (layers 1-8)\n\n"
+        "- Graphite alternate layout (switchable from System layer)\n\n"
         "Layers:\n"
         "- 0: Base (QWERTY)\n"
-        "- 1-7: Graphite transition steps\n"
-        "- 8: Graphite (final)\n"
-        "- 9: Nav (navigation, function keys)\n"
-        "- 10: System (Bluetooth, bootloader, layer switching)\n"
-        "- 11: Numpad\n"
-        "- 12: Tmux (tab switching)\n"
-        "- 13: Vim (split navigation)\n"
-        "- 14: Mouse (trackpad click layer)"
+        "- 1: Graphite\n"
+        "- 2: Nav (navigation, function keys)\n"
+        "- 3: System (Bluetooth, bootloader, layer switching)\n"
+        "- 4: Numpad\n"
+        "- 5: Tmux (tab switching)\n"
+        "- 6: Vim (split navigation)\n"
+        "- 7: Mouse (trackpad click layer)"
     ),
     "tags": ["qwerty", "graphite", "home-row-mods", "mac"],
     "custom_defined_behaviors": custom_behaviors,
@@ -764,13 +624,10 @@ layout = {
     "config_parameters": [],
     "layout_parameters": {"cirque_touch_sensitivity": ""},
     "layer_names": [
-        "Base", "Step1", "Step2", "Step3", "Step4",
-        "Step5", "Step5a", "Step6", "Graphite",
-        "Nav", "System", "Numpad", "Tmux", "Vim", "Mouse"
+        "Base", "Graphite", "Nav", "System", "Numpad", "Tmux", "Vim", "Mouse"
     ],
     "layers": [
-        base, step1, step2, step3, step4, step5, step5a, step6, graphite,
-        nav, system, numpad, tmux, vim, mouse
+        base, graphite, nav, system, numpad, tmux, vim, mouse
     ],
     "macros": [],
     "inputListeners": [
@@ -788,7 +645,7 @@ layout = {
             "inputProcessors": [
                 {"code": "&zip_xy_scaler", "params": [3, 1]},
                 {"code": "&zip_button_behaviors", "params": [{"value": "&none"}]},
-                {"code": "&zip_temp_layer", "params": [14, 200]}
+                {"code": "&zip_temp_layer", "params": [7, 200]}
             ]
         }
     ],

@@ -3,4 +3,4 @@ zmk/
 modules/
 tools/
 .west/
-firmware/
+firmware/.DS_Store

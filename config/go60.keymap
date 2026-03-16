@@ -7,7 +7,18 @@
 #include "positions_go60.dtsi"
 #include "shared.dtsi"
 
-/* ── Go60-specific: dual Cirque trackpad input listeners ──────── */
+/* ── Go60-specific: custom input processor + trackpad listeners ── */
+
+/ {
+    input_processors {
+        zip_click_to_right_click_mapper: zip_click_to_right_click_mapper {
+            compatible = "zmk,input-processor-code-mapper";
+            #input-processor-cells = <0>;
+            type = <INPUT_EV_KEY>;
+            map = <INPUT_BTN_0 INPUT_BTN_1>;
+        };
+    };
+};
 
 &cirque_lh_listener {
     input-processors =

@@ -3,6 +3,7 @@
 
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 #include "positions_go60.dtsi"
 #include "shared.dtsi"
@@ -11,6 +12,14 @@
 
 / {
     input_processors {
+        zip_xy_to_vscroll_mapper: zip_xy_to_vscroll_mapper {
+            compatible = "zmk,input-processor-code-mapper";
+            #input-processor-cells = <0>;
+            type = <INPUT_EV_REL>;
+            map = <INPUT_REL_X INPUT_REL_WHEEL
+                   INPUT_REL_Y INPUT_REL_WHEEL>;
+        };
+
         zip_click_to_right_click_mapper: zip_click_to_right_click_mapper {
             compatible = "zmk,input-processor-code-mapper";
             #input-processor-cells = <0>;
@@ -22,8 +31,9 @@
 
 &cirque_lh_listener {
     input-processors =
-        <&zip_xy_to_scroll_mapper>,
-        <&zip_xy_scaler 1 8>,
+        <&zip_xy_to_vscroll_mapper>,
+        <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
+        <&zip_xy_scaler 1 16>,
         <&zip_click_to_right_click_mapper>;
 };
 

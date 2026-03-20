@@ -2,14 +2,19 @@
 
 ## Repository Overview
 
-ZMK firmware configuration for the Eyelash Sofle split keyboard. This is a ZMK user config repo — it defines the keymap, board configuration, and build settings. The actual ZMK firmware source is pulled in via West (Zephyr's package manager).
+ZMK firmware configuration for two split keyboards — the **Eyelash Sofle** and the **MoErgo Go60** — sharing a single keymap via C preprocessor macros. The actual ZMK firmware source is pulled in via West (Zephyr's package manager) from MoErgo's fork (`moergo-sc/zmk:go60-zmk0.3.0`).
 
 ## Key Files
 
-- `config/eyelash_sofle.keymap` — Main keymap file (layers, behaviors, combos, macros)
-- `config/eyelash_sofle.conf` — Kconfig settings (RGB, sleep, Bluetooth, mouse, etc.)
-- `build.yaml` — Defines which boards/shields to build (left with ZMK Studio, right, settings_reset)
-- `config/west.yml` — West manifest pinning ZMK version and additional modules
+- `config/shared.dtsi` — All behaviors, macros, combos, and layers (shared between both keyboards)
+- `config/positions_sofle.dtsi` — Sofle position names, position groups, ROW/THUMB macros
+- `config/positions_go60.dtsi` — Go60 position names, position groups, ROW/THUMB macros
+- `config/eyelash_sofle.keymap` — Thin wrapper: includes + Sofle-specific config (encoder, mouse input)
+- `config/go60.keymap` — Thin wrapper: includes + Go60-specific config (dual Cirque trackpads)
+- `config/eyelash_sofle.conf` — Sofle Kconfig (RGB, sleep, Bluetooth, mouse, encoder, etc.)
+- `config/go60.conf` — Go60 Kconfig (RGB, sleep, trackpad, full consumer HID)
+- `config/west.yml` — West manifest pointing to MoErgo's ZMK fork
+- `build.yaml` — Build targets: 3 Sofle (left+studio, right, settings_reset) + 2 Go60 (lh, rh)
 - `boards/` — Custom board definitions for the Eyelash Sofle
 
 ## Building and Downloading Firmware
@@ -31,34 +36,49 @@ gh run watch          # live stream of build progress
 #    ./scripts/download-firmware.sh --all  — all remote branches
 #
 # Firmware is organized by branch: firmware/<branch>/firmware/
-#   eyelash_sofle_studio_left.uf2        — left half (with ZMK Studio enabled)
-#   nice_view_adapter nice_view_battery-eyelash_sofle_right-zmk.uf2  — right half
-#   settings_reset-eyelash_sofle_left-zmk.uf2  — settings reset
+#   Sofle:
+#     eyelash_sofle_studio_left.uf2        — left half (with ZMK Studio enabled)
+#     nice_view_adapter nice_view_battery-eyelash_sofle_right-zmk.uf2  — right half
+#     settings_reset-eyelash_sofle_left-zmk.uf2  — settings reset
+#   Go60:
+#     go60_lh-zmk.uf2  — left half
+#     go60_rh-zmk.uf2  — right half
 ```
 
-The workflow also auto-commits a keymap drawing via keymap-drawer (commit message prefixed with `[Draw]`). This means after pushing, the remote may have one extra commit — use `git pull --rebase` before pushing again.
+The workflow also auto-commits a keymap drawing via keymap-drawer (Sofle only; commit message prefixed with `[Draw]`). This means after pushing, the remote may have one extra commit — use `git pull --rebase` before pushing again.
 
-## Keymap Architecture
+## Shared Keymap Architecture
+
+The keymap is shared between Sofle and Go60 using preprocessor macros that handle the physical differences:
+
+- **ROW macro** — Rows 0-3 take 13 params (6L + encoder + 6R). Sofle keeps all 13; Go60 drops the encoder column, keeping 12.
+- **THUMB macro** — Row 4 takes 14 params (union of both keyboards). Each board picks its 12: Sofle drops Go60-only inner thumb keys (lht1/rht1); Go60 drops Sofle-only encoder press and mid key.
+- **Named positions** (POS_Q, POS_W, etc.) — Let combos and hold-trigger-key-positions be shared despite different position numbering.
+- **Position groups** (RIGHT_HAND, LEFT_HAND, THUMB_KEYS, etc.) — Used in HRM hold-trigger-key-positions.
+- **`#ifdef HAS_ENCODER`** — Guards Sofle-specific encoder/sensor config.
 
 ### Layers
 0. **Base** — QWERTY with home-row mods (urob timerless HRM pattern)
-1. **Nav** — Navigation, function keys, mouse keys
-2. **Layer 2** — Bluetooth, system controls, bootloader
-3. **Numpad** — Number pad layout
-4. **Tmux** — Tmux tab switching via `tmux_tab` macro (Ctrl+A then number)
+1. **Graphite** — Graphite alpha overlay on Base
+2. **Nav** — Navigation, function keys, mouse keys
+3. **System** — Bluetooth, system controls, bootloader
+4. **Numpad** — Number pad layout, RGB controls
+5. **Tmux** — Tmux tab switching via `tmux_tab` macro (Ctrl+A then number)
+6. **Vim** — Vim split navigation via `vim_split` macro (Ctrl+W then direction)
 
 ### Behaviors
 - `hml` / `hmr` — Left/right home-row mods using positional hold-tap with `require-prior-idle-ms`
 - `lth` — Layer-tap for thumb keys. Like HRMs but uses `hold-trigger-key-positions` (all keys) and `hold-trigger-on-release` instead of `require-prior-idle-ms`, so layer-hold works reliably after quick keypresses
 - `z_tmux` — Hold Z for Tmux layer, tap for Z
+- `v_vim` — Hold V for Vim layer, tap for V
 - `esc_grave_tilde` — Tap for Esc, Shift for ~, other mods for `
 
 ### Key Constants
 - `QUICK_TAP_MS = 175` — Quick-tap window used across behaviors
 
-## Go60 Export
+## Go60 Layout Editor Export
 
-The Sofle keymap can be exported to MoErgo Go60 format. See [docs/go60-export.md](docs/go60-export.md) for full details.
+The keymap can also be exported to MoErgo's Go60 Layout Editor format. See [docs/go60-export.md](docs/go60-export.md) for details.
 
 ```bash
 python3 scripts/generate-go60-layout.py

@@ -1,6 +1,6 @@
-# Go60 Export
+# Go60 Layout Editor Export
 
-The Sofle keymap can be exported to MoErgo Go60 format for use with the Go60 Layout Editor.
+This repo builds native ZMK firmware for the Go60 (via `config/go60.keymap` sharing `config/shared.dtsi`). This export script is an **alternative** path for users who prefer to use MoErgo's Go60 Layout Editor instead.
 
 ## Export workflow
 
@@ -14,7 +14,7 @@ python3 scripts/generate-go60-layout.py
 ```
 
 ## Key files
-- `scripts/generate-go60-layout.py` — Conversion script (Sofle keymap → Go60 JSON)
+- `scripts/generate-go60-layout.py` — Conversion script (shared keymap → Go60 editor JSON)
 - `sofle-eyelash-go60-layout.json` — Generated output (importable by Go60 editor)
 
 ## Position mapping
@@ -27,12 +27,14 @@ Encoder column removed, right-side positions shift down accordingly.
 ### Row 4 (bottom/thumb)
 Sofle has 6 keys per side. Go60 has 6 per side split into 3 bottom-row + 3 thumb-cluster.
 
-The Sofle's outer 3 keys per side map to Go60 bottom row, inner 3 to thumb cluster. The innermost thumb keys (L_T3=56, R_T3=57) are "extra" keys not present on the Sofle.
+The Sofle's outer 3 keys per side map to Go60 bottom row, inner 3 to thumb cluster. The innermost thumb keys (LH T1=56, RH T1=57) are "extra" keys not present on the Sofle.
+
+MoErgo naming convention: C(column)R(row) for finger keys (C1=index inner, C6=pinky outer), T(number) for thumb keys (T1=innermost, numbered outward).
 
 Physical layout (outer → inner per side):
 ```
-Left:  48(L_C4R5) 49(L_C3R5) 50(L_C2R5) 54(L_T1) 55(L_T2) 56(L_T3)
-Right: 57(R_T3) 58(R_T2) 59(R_T1) 51(R_C2R5) 52(R_C3R5) 53(R_C4R5)
+Left:  48(LH C4R5) 49(LH C3R5) 50(LH C2R5) 54(LH T3) 55(LH T2) 56(LH T1)
+Right: 57(RH T1) 58(RH T2) 59(RH T3) 51(RH C2R5) 52(RH C3R5) 53(RH C4R5)
 ```
 
 Current mapping:

@@ -30,11 +30,7 @@
 };
 
 &cirque_lh_listener {
-    input-processors =
-        <&zip_xy_to_vscroll_mapper>,
-        <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
-        <&zip_xy_scaler 1 16>,
-        <&zip_click_to_right_click_mapper>;
+    input-processors = <&zip_xy_scaler 3 1>;
 };
 
 &cirque_rh_listener {

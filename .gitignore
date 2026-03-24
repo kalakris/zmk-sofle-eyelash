@@ -4,3 +4,5 @@ modules/
 tools/
 .west/
 firmware/.DS_Store
+firmware
+.DS_Store

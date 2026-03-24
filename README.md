@@ -1,22 +1,69 @@
-- [中文](README.md)
-- [English](README_EN.md)
+# ZMK Firmware — Eyelash Sofle & MoErgo Go60
 
-# 更新列表
-- 2025/3/30 增加睡眠进入时间1小时  增加防抖时间 优化睡眠后功耗 
-- 2024/12/21
-  1. 增加zmk-studio支持（只需要刷新左手即可使用）。
-- 2024/10/24
-  1. 修改供电模式，功耗降低。
-  2. 修正RGB供电自动关闭的功能。
+ZMK firmware configuration for two split keyboards sharing a single keymap via C preprocessor macros.
 
-> 如果您的键盘于10月24日之前更新，请更新最新的固件。
-> 
----
-# 联系我
+| Keyboard | Halves | Notable Hardware |
+|---|---|---|
+| **Eyelash Sofle** | Left (ZMK Studio) + Right | Encoder, nice!view displays |
+| **MoErgo Go60** | Left + Right | Dual Cirque trackpads |
 
-如需3D打印的模型文件或者键盘有任何异常和故障，请联系380465425@qq.com
+## Keymap
 
-# Sofle键位图
+<img src="keymap-drawer/sofle.svg">
 
-<img src="keymap-drawer/sofle.svg" >
+### Layers
 
+| # | Layer | Purpose |
+|---|---|---|
+| 0 | Base | QWERTY with home-row mods (urob timerless HRM) |
+| 1 | Graphite | Graphite alpha overlay |
+| 2 | Nav | Navigation, function keys, mouse keys |
+| 3 | System | Bluetooth, system controls, bootloader |
+| 4 | Numpad | Number pad, RGB controls |
+| 5 | Tmux | Tmux tab switching (Ctrl+A → number) |
+| 6 | Vim | Vim split navigation (Ctrl+W → direction) |
+
+## Shared Keymap Architecture
+
+Both keyboards include `config/shared.dtsi`, which contains all behaviors, macros, combos, and layers. Physical differences are handled by per-board position files:
+
+- **`config/positions_sofle.dtsi`** / **`config/positions_go60.dtsi`** — define `ROW` and `THUMB` macros that map the shared 13-column row layout onto each board's physical matrix.
+- **Named positions** (`POS_Q`, `POS_W`, …) let combos and hold-trigger lists work despite different position numbering.
+- **`#ifdef HAS_ENCODER`** guards Sofle-specific encoder config.
+
+## Building Firmware
+
+Firmware is built automatically by GitHub Actions on every push. The workflow also auto-commits a keymap drawing (commit message prefixed with `[Draw]`).
+
+```bash
+# Push, then download the built firmware:
+git push
+./scripts/download-firmware.sh            # current branch
+./scripts/download-firmware.sh --all      # all remote branches
+```
+
+Firmware artifacts are saved under `firmware/<branch>/firmware/`.
+
+## Go60 Layout Editor Export
+
+The keymap can be exported to MoErgo's Go60 Layout Editor format:
+
+```bash
+python3 scripts/generate-go60-layout.py
+# Import sofle-eyelash-go60-layout.json at https://my.moergo.com/go60/
+```
+
+## Key Files
+
+| File | Purpose |
+|---|---|
+| `config/shared.dtsi` | Behaviors, macros, combos, layers (shared) |
+| `config/eyelash_sofle.keymap` | Sofle wrapper (encoder, mouse input) |
+| `config/go60.keymap` | Go60 wrapper (trackpads) |
+| `config/positions_sofle.dtsi` | Sofle position names & ROW/THUMB macros |
+| `config/positions_go60.dtsi` | Go60 position names & ROW/THUMB macros |
+| `config/eyelash_sofle.conf` | Sofle Kconfig |
+| `config/go60.conf` | Go60 Kconfig |
+| `config/west.yml` | West manifest (MoErgo's ZMK fork) |
+| `build.yaml` | GitHub Actions build targets |
+| `boards/` | Custom board definitions for Eyelash Sofle |

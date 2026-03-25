@@ -1,0 +1,57 @@
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 25
+
+#include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
+
+#include "positions_go60.dtsi"
+#include "shared.dtsi"
+
+/* ── Go60-specific: custom input processor + trackpad listeners ── */
+
+/ {
+    input_processors {
+        zip_xy_to_vscroll_mapper: zip_xy_to_vscroll_mapper {
+            compatible = "zmk,input-processor-code-mapper";
+            #input-processor-cells = <0>;
+            type = <INPUT_EV_REL>;
+            map = <INPUT_REL_X INPUT_REL_WHEEL
+                   INPUT_REL_Y INPUT_REL_WHEEL>;
+        };
+
+        zip_click_to_right_click_mapper: zip_click_to_right_click_mapper {
+            compatible = "zmk,input-processor-code-mapper";
+            #input-processor-cells = <0>;
+            type = <INPUT_EV_KEY>;
+            map = <INPUT_BTN_0 INPUT_BTN_1>;
+        };
+    };
+};
+
+&cirque_lh_listener {
+    input-processors = <&zip_xy_scaler 3 1>, <&zip_button_behaviors>;
+};
+
+&cirque_rh_listener {
+    input-processors = <&zip_xy_scaler 3 1>, <&zip_button_behaviors>;
+    nav_scroll {
+        layers = <2>;
+        input-processors = <&zip_xy_to_vscroll_mapper>, <&zip_xy_scaler 1 16>;
+    };
+};
+
+/* ── Override: left half is now peripheral ── */
+/* Forward local trackpad to central via split */
+&cirque_split {
+    device = <&glidepoint>;
+};
+
+/* Disable listeners (central handles all input processing) */
+&cirque_lh_listener {
+    status = "disabled";
+};
+
+&cirque_rh_listener {
+    status = "disabled";
+};

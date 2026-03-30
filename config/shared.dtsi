@@ -209,6 +209,17 @@
             hold-trigger-key-positions = <ALL_KEYS>;
             hold-trigger-on-release;
         };
+
+        lth_sk: lth_sk {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            bindings = <&mo>, <&sk>;
+            hold-trigger-key-positions = <ALL_KEYS>;
+            hold-trigger-on-release;
+        };
     };
 
     macros {
@@ -281,7 +292,7 @@ THUMB(&kp C_MUTE,                                              /* enc       (Sof
       &kp ENTER,                                                /* LH T1    (Go60 only)  */
       &kp ENTER,                                                /* mid      (Sofle only) */
       &kp ESC,                                                   /* RH T1    (Go60 only)  */
-      &sk RSHIFT,    &lth 3 SPACE,                              /* RH T2 T3              */
+      &lth_sk 7 RSHIFT, &lth 3 SPACE,                           /* RH T2 T3              */
       &kp BACKSPACE, &kp C_VOLUME_DOWN, &kp C_VOLUME_UP)       /* RH C2R5 C3R5 C4R5     */
             >;
 
@@ -435,6 +446,32 @@ THUMB(&trans,
       &trans,
       &trans, &trans,
       &trans, &trans, &trans)
+            >;
+        };
+
+        Magic {
+            display-name = "Magic";
+            bindings = <
+ROW(&bt BT_CLR,  &kp C_BRI_DN,       &kp C_BRI_UP,       &kp C_PREV,          &kp C_NEXT,          &kp C_PP,
+    &none,
+    &kp C_MUTE,  &kp C_VOL_DN,       &kp C_VOL_UP,        &none,               &none,               &bt BT_CLR_ALL)
+ROW(&bootloader, &rgb_ug RGB_SPI,     &rgb_ug RGB_SAI,     &rgb_ug RGB_HUI,     &rgb_ug RGB_BRI,     &rgb_ug RGB_TOG,
+    &none,
+    &none,       &none,               &none,                &none,               &none,               &bootloader)
+ROW(&sys_reset,  &rgb_ug RGB_SPD,     &rgb_ug RGB_SAD,     &rgb_ug RGB_HUD,     &rgb_ug RGB_BRD,     &rgb_ug RGB_EFF,
+    &none,
+    &none,       &none,               &none,                &none,               &none,               &sys_reset)
+ROW(&none,       &none,               &bt BT_SEL 0,        &bt BT_SEL 1,        &bt BT_SEL 2,        &bt BT_SEL 3,
+    &none,
+    &none,       &none,               &none,                &none,               &none,               &none)
+THUMB(&none,
+      &out OUT_USB, &none, &none,
+      &none, &none,
+      &none,
+      &none,
+      &none,
+      &none, &none,
+      &none, &none, &none)
             >;
         };
     };
